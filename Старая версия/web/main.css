@@ -1,0 +1,62 @@
+*{
+    font-family:  'Roboto', sans-serif;
+}
+
+body{
+    /* background: #FFAFBD;  /* fallback for old browsers 
+    background: -webkit-linear-gradient(to right, #ffc3a0, #FFAFBD);  
+    background: linear-gradient(to right, #ffc3a0, #FFAFBD);
+    */
+    background: #14171a;
+    padding: 0px;
+    margin: 0px;
+
+    color: white;
+    padding: 10px;
+}
+
+#url
+{ 
+    display: block;
+    border: none; 
+    width: 98%;
+    background: rgb(255, 255, 255, .5); 
+    border-radius: 10px;
+    padding: 10px;
+    color: white;
+    outline: none;
+    font-size: 30px;
+    
+}
+#url::placeholder
+{
+    color: rgba(36, 36, 36, 0.5)
+}
+.show
+{
+    display: block;
+    border: none; 
+    margin-top:10px; 
+    border-radius: 10px;
+    padding: 20px;
+    color: rgb(49, 49, 49);
+    outline: none;
+    width: 98%;
+    font-size: 20px;
+    color: #c0c0aa;
+    background: #2c3036;
+    cursor: pointer;
+    font-weight: bold;
+    text-transform: uppercase;
+
+}
+
+#info
+{
+    font-size: 18px; 
+}
+
+.checkbox
+{ 
+   margin: 20px;
+}

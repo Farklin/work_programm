@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+
+        <script src='eel.js'> </script>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+        <meta name="description" content="Описание страницы. Не менее 160 символов. " />
+        <meta name="keywords" content="Здесь указываем список ключевых слов, разделенные запятой." />
+        <title>Отчет для ТЗ :P</title>
+        <link rel="stylesheet" href="main.css">
+        <link rel="icon" href="favicon.png">
+    </head>
+    <body>
+        <input type="text" id="url" placeholder="Введите id проекта">
+        <button class = 'show' id='show'>Начать</button>
+        <button class = 'show' id='report_meta'>Отчет о meta</button>
+
+        <input type="checkbox" id='chek_meta' class='checkbox'> meta
+        <input type="checkbox" id='chek_h1' class='checkbox'> h1
+        <input type="checkbox" id='chek_pages' class='checkbox'> страницы в продвижении
+        <div id="info"></div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> 
+        <script type="text/javascript">
+            async function display_function(flag_meta, flag_h1, flag_pages){
+                place =  document.getElementById('url').value; 
+                let res = await eel.get_function(place, flag_meta, flag_h1, flag_pages)(); 
+                document.getElementById('info').innerHTML = res; 
+            }
+            async function all(){
+                place =  document.getElementById('url').value; 
+                let res = await eel.all(place)(); 
+                document.getElementById('info').innerHTML = res; 
+            }
+
+                jQuery("#show").on('click', function(){
+                    if($("#chek_meta").is(":checked")) {  
+                        flag_meta = true 
+                    }   
+                    else{
+                        flag_meta = false 
+                    }
+                     if($("#chek_h1").is(":checked")) {  
+                        flag_h1 = true 
+                    }   
+                    else{
+                        flag_h1 = false 
+                    }
+                  
+
+                    if($("#chek_pages").is(":checked")) {  
+                        flag_pages = true 
+                    }   
+                    else{
+                        flag_pages = false 
+                    }
+                    display_function(flag_meta, flag_h1, flag_pages);
+
+                });
+
+                jQuery("#report_meta").on('click', function(){
+                   
+                    all ();
+
+                });
+
+
+
+        </script>
+    </body>
+</html>
