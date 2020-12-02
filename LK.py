@@ -5,6 +5,36 @@ import openpyxl
 import csv
 
 
+class Key: 
+    def __init__(self, phraze, position):
+        self.position = position 
+        self.phraze = phraze
+
+
+class Keys: 
+    def __init__(self):
+        self.keys = []
+    
+    def add(self, key): 
+        self.keys.append(key)
+    def get(self): 
+        return self.keys
+
+class Landing_Page: 
+    def __init__(self, url, keys): 
+        self.url = url 
+        self.keys = keys 
+    
+    def print_keys(self):
+        print(self.url)
+        for key in self.keys.get(): 
+            print(key.position, key.phraze)
+
+    def down_position(self):
+        for key in self.keys.get(): 
+            if int(key.position) > 10 or int(key.position) == 0: 
+                print(key.position, key.phraze)
+
 
 class LK_Command: 
 
@@ -77,29 +107,32 @@ class LK_Command:
                     })
 
         self.compilation = compilation 
-
+        self.group_phraze_in_url()
 
     # Вывести все слова в топе 
-    def get_praze_top(self):
-        for row in self.compilation: 
-           if int(row['position']) > 10: 
-               print(row['phraze']) 
+    def get_praze_down(self):
+        for lp in self.landing_pages:
+            lp.down_position()
+           
 
     def group_phraze_in_url(self):
-        mas = []
-        group_phraze = [] 
-        
-        for row in self.compilation:
-            url = row['url']
-            for row_2 in self.compilation: 
-                if url == row_2['url']: 
-                    group_phraze.append(row_2['phraze'])
-            mas.append({'url': url, 'keys': group_phraze })       
-            group_phraze=[] 
-        
-        print(mas)
+        mas_pages = []
+        self.landing_pages = [] 
+        for row in self.compilation: 
+            if row['url'] not in mas_pages: 
+                mas_pages.append(row['url'])
+                url = row['url']
+                keys = Keys()  
+                for row_2 in self.compilation: 
+                    if row_2['url'] == row['url']: 
+                        phraze = row_2['phraze']
+                        position = row_2['position']
+                        key = Key(phraze, position)
+                        keys.add(key)
+                lp = Landing_Page(url, keys)
+                self.landing_pages.append(lp)
 
 user = LK_Command('Jilcov', 'Jilcov435333')
 #user.downland_TR('5202')
 user.analization_TR()   
-user.group_phraze_in_url()
+user.get_praze_down()
